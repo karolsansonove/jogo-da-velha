@@ -10,13 +10,21 @@ let player2;
 
 function initGame(event) {
   event.preventDefault();
-  boardSection.classList.add('active');
-  playersSection.classList.remove('active');
-  sectionBtns.classList.add('active');
 
   // coletando nome dos jogadores
   player1 = document.querySelector('input[name="name-player-1"]');
   player2 = document.querySelector('input[name="name-player-2"]');
+
+  const alert = document.querySelector('.alert');
+
+  if (player1.value === '' || player2.value === '') {
+    alert.classList.add('active');
+  } else {
+    boardSection.classList.add('active');
+    playersSection.classList.remove('active');
+    sectionBtns.classList.add('active');
+    alert.classList.remove('active');
+  }
 
   currentPlayer.innerText = player1.value;
 }
@@ -26,11 +34,14 @@ btnStart.addEventListener('click', initGame);
 // jogador da vez
 function initCurrentPlayer() {
   // altera para o próximo player e retorna o anterior
+  const dataPlayerTurn = document.querySelector('[data-player-turn]');
   if (currentPlayer.innerText === player1.value) {
     currentPlayer.innerText = player2.value;
+    dataPlayerTurn.dataset.playerTurn = 2;
     return player1;
   } else {
     currentPlayer.innerText = player1.value;
+    dataPlayerTurn.dataset.playerTurn = 1;
     return player2;
   }
 }

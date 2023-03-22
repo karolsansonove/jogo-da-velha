@@ -88,6 +88,15 @@ input:focus {
   margin: 20px 0 40px;
 }
 
+.alert {
+  display: none;
+  color: #fff;
+}
+
+.alert.active {
+  display: block;
+}
+
 .section-btn {
   display: none;
 }
@@ -122,13 +131,21 @@ input:focus {
   margin: 20px 0;
   padding: 10px;
   border-radius: 3px;
-  border: 2px solid rgba(9, 216, 19);
   box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.451);
-  color: rgba(9, 216, 19);
   text-shadow: rgba(0, 0, 0, 0.555) 0.1em 0.1em 0.2em;
   font-weight: 500;
   height: 50px;
   max-width: 200px;
+}
+
+[data-player-turn='1'] {
+  border: 2px solid rgba(9, 216, 19);
+  color: rgba(9, 216, 19);
+}
+
+[data-player-turn='2'] {
+  border: 2px solid rgb(255, 145, 0);
+  color: rgb(255, 145, 0);
 }
 
 .player-turn img {
