@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <title>Jogo da Velha</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header-title">Jogo da Velha</h1>
+    <p class="header-caption">(Tic-Tac-Toe)</p>
+  </header>
+  <section class="section-players container active">
+    <form class="form-players">
+      <div class="player">
+        <label class="lb-player" for="name-player-1">Jogador 1</label>
+        <input data-letter="x" class="input-player" type="text" name="name-player-1" id="name-player-1" placeholder="Nome...">
+      </div>
+      <div class="player">
+        <label class="lb-player" for="name-player-2">Jogador 2</label>
+        <input data-letter="o" class="input-player" type="text" name="name-player-2" id="name-player-2" placeholder="Nome...">
+      </div>
+      <button class="btn-start" type="submit">Iniciar partida</button>
+    </form>
+  </section>
+  <section class="section-btn container">
+    <div>
+      <button type="button" class="btn-new-players">Mudar jogadores</button>
+      <button type="button" class="btn-reset">Zerar</button>
+    </div>
+    <div class="player-turn">
+      <img src="./img/videogame.png" alt="Ícone de videogame">
+      <span data-player></span>
+    </div>
+  </section>
+  <section class="section-board container">
+    <div class="board">
+      <div class="field field1 clickable"></div>
+      <div class="field field2 clickable"></div>
+      <div class="field field3 clickable"></div>
+      <div class="field field4 clickable"></div>
+      <div class="field clickable"></div>
+      <div class="field field6 clickable"></div>
+      <div class="field field7 clickable"></div>
+      <div class="field field8 clickable"></div>
+      <div class="field field9 clickable"></div>
+    </div>
+  </section>
+</body>
+
+</html>
