@@ -90,7 +90,7 @@ input:focus {
 
 .alert {
   display: none;
-  color: #fff;
+  color: rgb(255, 16, 16);
 }
 
 .alert.active {

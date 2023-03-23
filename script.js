@@ -72,6 +72,9 @@ function resetBoard() {
     field.classList.add('clickable');
     field.parentNode.style.backgroundColor = 'transparent';
   });
+  const dataPlayerTurn = document.querySelector('[data-player-turn]');
+  currentPlayer.innerText = player1.value;
+  dataPlayerTurn.dataset.playerTurn = 1;
 }
 
 btnReset.addEventListener('click', resetBoard);
