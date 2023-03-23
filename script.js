@@ -2,7 +2,7 @@
 const btnStart = document.querySelector('.btn-start');
 const sectionBtns = document.querySelector('.section-btn');
 const currentPlayer = document.querySelector('[data-player]');
-const fields = document.querySelectorAll('.field');
+const fields = document.querySelectorAll('[data-letter-board]');
 const boardSection = document.querySelector('.section-board');
 const playersSection = document.querySelector('.section-players');
 let player1;
@@ -50,10 +50,8 @@ function initCurrentPlayer() {
 function writeLetter(event) {
   const currentPlayer = initCurrentPlayer();
 
-  const p = document.createElement('p');
-  p.classList.add('letter');
-  p.innerText = currentPlayer.dataset.letter;
-  event.target.appendChild(p);
+  event.target.innerText = currentPlayer.dataset.letter;
+  event.target.dataset.letterBoard = currentPlayer.dataset.letter;
   event.target.removeEventListener('click', writeLetter); // remove interação de escrita
   event.target.classList.remove('clickable'); // field não mais clicável visualmente
 
@@ -72,6 +70,7 @@ function resetBoard() {
     field.innerText = '';
     field.addEventListener('click', writeLetter);
     field.classList.add('clickable');
+    field.parentNode.style.backgroundColor = 'transparent';
   });
 }
 
@@ -90,26 +89,50 @@ btnNewPlayers.addEventListener('click', changePlayers);
 
 // calcular vencedor
 function calculateWinner() {
-  const arrBoard = [];
+  const winningCombination = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
 
-  fields.forEach((item) => {
-    arrBoard.push(item.innerText);
+  let winner;
+  winningCombination.forEach((item) => {
+    const result = compareValues(
+      document.querySelector(`[data-letter-position="${item[0]}"]`).innerText,
+      document.querySelector(`[data-letter-position="${item[1]}"]`).innerText,
+      document.querySelector(`[data-letter-position="${item[2]}"]`).innerText,
+    );
+    if (result) {
+      winner = item;
+      return;
+    }
   });
 
-  if (arrBoard[0] === arrBoard[1] && arrBoard[0] === arrBoard[2]) {
-    return arrBoard[0];
-    // return { 0: arrBoard[0], 1: arrBoard[0], 2: arrBoard[0] };
-  } else if (arrBoard[3] === arrBoard[4] && arrBoard[3] === arrBoard[5]) {
-    return arrBoard[3];
-    // return { 3: arrBoard[3], 4: arrBoard[3], 5: arrBoard[3] };
-  } else if (arrBoard[6] === arrBoard[7] && arrBoard[6] === arrBoard[8]) {
-    return arrBoard[6];
-    // return { 6: arrBoard[6], 7: arrBoard[6], 8: arrBoard[6] };
-  } else if (arrBoard[0] === arrBoard[4] && arrBoard[0] === arrBoard[8]) {
-    return arrBoard[0];
-    // return { 0: arrBoard[0], 4: arrBoard[0], 8: arrBoard[0] };
-  } else if (arrBoard[2] === arrBoard[4] && arrBoard[2] === arrBoard[6]) {
-    return arrBoard[2];
-    // return { 2: arrBoard[2], 4: arrBoard[2], 6: arrBoard[2] };
+  if (winner) {
+    const field0 = document.querySelector(
+      `[data-letter-position="${winner[0]}"]`,
+    ).parentNode;
+    const field1 = document.querySelector(
+      `[data-letter-position="${winner[1]}"]`,
+    ).parentNode;
+    const field2 = document.querySelector(
+      `[data-letter-position="${winner[2]}"]`,
+    ).parentNode;
+
+    field0.style.backgroundColor = 'green';
+    field1.style.backgroundColor = 'green';
+    field2.style.backgroundColor = 'green';
   }
+}
+
+function compareValues(value1, value2, value3) {
+  return (
+    ('X' === value1 && value1 === value2 && value2 === value3) ||
+    ('O' === value1 && value1 === value2 && value2 === value3)
+  );
 }
