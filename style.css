@@ -62,6 +62,16 @@ input:focus {
   color: #fff;
 }
 
+[for='name-player-1'] span {
+  color: rgb(255, 0, 234);
+  text-transform: uppercase;
+}
+
+[for='name-player-2'] span {
+  color: rgb(255, 238, 0);
+  text-transform: uppercase;
+}
+
 .input-player {
   background-color: rgba(87, 87, 87, 0.5);
   height: 100%;
